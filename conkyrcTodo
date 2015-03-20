@@ -1,0 +1,60 @@
+background yes
+use_xft yes
+xftfont Blue Highway:pixelsize=20
+xftalpha 0.8
+update_interval 60.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+stippled_borders 0
+border_margin 4
+border_width 0
+default_color black
+default_shade_color black
+default_outline_color white
+alignment top_right
+gap_x 2000
+gap_y 32
+no_buffers yes
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+use_spacer yes
+minimum_size 900 1300
+
+own_window_argb_value 0
+own_window_argb_visual yes
+own_window_colour 000000
+TEXT
+${color black}${goto 21}$stippled_hr${color}
+${color white}${font RsbillsDng:pixelsize=26}!${color}${font}
+${alignc}${color white}TODO :${font Blue Highway:pixelsize=24}${color black}
+
+${execi 60 cat -n /home/zero/todo.txt  | fold -w60}
+
+${color white}${font Poky:pixelsize=30}Y${font}${alignc}${color white}WIFI: ${font Blue Highway:pixelsize=24}${color black}
+
+${goto 50}Essid: ${goto 200}${wireless_essid wlan0}
+${goto 50}Quality: ${goto 200}${wireless_link_qual_perc wlan0}%
+${goto 50}Bitrate: ${goto 200}${wireless_bitrate wlan0}
+
+${goto 50}Local IP: ${goto 200}${addr wlan0}
+${goto 50}Public IP: ${goto 200}${execi 1800 wget -q -O - http://ip.tupeux.com | tail }
+${goto 50}MAC: ${goto 200}${wireless_ap wlan0}
+#${if_running mocp}${color}
+#${goto 21}$stippled_hr
+#${goto 26}mocp player is ${color e0e0e0}running${color} :${font}
+
+#${goto 26}singer: 
+#${goto 21}${color e0e0e0}${goto 26}${exec mocp -i | sed -n -e 's/\(Artist:\) \(.*\)/\2/p'}${color}
+#${goto 26}title:     
+#${goto 21}${color e0e0e0}${goto 26}${exec mocp -i | sed -n -e 's/\(SongTitle:\) \(.*\)/\2/p'}${color}
+#${goto 26}album:     
+#${goto 21}${color e0e0e0}${goto 26}${exec mocp -i | sed -n -e 's/\(Album:\) \(.*\)/\2/p'}${font}${else}${color}
+#${goto 21}${color AEC283}* mocp player isn't running${color}${font}${endif}

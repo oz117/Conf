@@ -1,0 +1,83 @@
+background yes
+use_xft yes
+xftfont Blue Highway:pixelsize=24
+xftalpha 0.8
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+stippled_borders 0
+border_margin 4
+border_width 0
+default_color black
+default_shade_color black
+default_outline_color white
+alignment top_right
+gap_x 20
+gap_y 12
+no_buffers yes
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+use_spacer yes
+minimum_size 450 1400
+
+#maximum_width 360
+#minimum_size 250 0 ## largeur et hauteur
+#maximum_width 250  ## largeur seulement
+
+own_window_argb_value 0
+own_window_argb_visual yes
+own_window_colour 000000
+TEXT
+#Date && Weather
+${font Poky:pixelsize=30}d${font}${voffset 6}${goto 50}${font Blue Highway:pixelsize=26}date & weather :${font} ${font Blue Highway:pixelsize=24}$alignr${time %H:%M}${font}${color}
+
+${goto 50}uptime: ${color white}$uptime_short
+
+${goto 50}${color black}Paris: ${color white}${goto 126}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LFPO temperature temperature 30}°C
+${goto 50}$stippled_hr
+#Computer info
+${font StyleBats:pixelsize=30}${color black}M${font}${alignc}${font Blue Highway:pixelsize=24}system :${font}${color white}
+
+${goto 50}distro: ${exec lsb_release -d -s} (${exec lsb_release -c -s}
+${goto 50}kernel: $kernel $machine
+#Processors info
+${font Poky:pixelsize=30}${color black}q${font}${voffset 6}${alignc}${font Blue Highway:pixelsize=24}proccessors :${font}${color white}
+
+${goto 50}cpu 1:${offset 15}${cpubar cpu0 9,100} ${cpu cpu0}% ${alignr} ${if_match ${hwmon 1 temp 1} >= 65}${color orange}${hwmon 1 temp 1}°C${else}${if_match ${hwmon 1 temp 1} >= 85}${color red}${hwmon 1 temp 1}°C${else}${color green}${hwmon 1 temp 1}°C${endif}${endif}${color white}
+${goto 50}cpu 2:${offset 15}${cpubar cpu0 9,100} ${cpu cpu1}% ${alignr} ${if_match ${hwmon 1 temp 2} >= 65}${color orange}${hwmon 1 temp 2}°C${else}${if_match ${hwmon 1 temp 2} >= 85}${color red}${hwmon 1 temp 2}°C${else}${color green}${hwmon 1 temp 2}°C${endif}${endif}${color white}
+${goto 50}cpu 3:${offset 15}${cpubar cpu0 9,100} ${cpu cpu2}% ${alignr} ${if_match ${hwmon 1 temp 3} >= 65}${color orange}${hwmon 1 temp 3}°C${else}${if_match ${hwmon 1 temp 3} >= 85}${color red}${hwmon 1 temp 3}°C${else}${color green}${hwmon 1 temp 3}°C${endif}${endif}${color white}
+${goto 50}cpu 4:${offset 15}${cpubar cpu0 9,100} ${cpu cpu3}% ${alignr} ${if_match ${hwmon 1 temp 4} >= 65}${color orange}${hwmon 1 temp 4}°C${else}${if_match ${hwmon 1 temp 4} >= 85}${color red}${hwmon 1 temp 4}°C${else}${color green}${hwmon 1 temp 4}°C${endif}${endif}${color white}
+
+${color black}${font}${voffset 6}${alignc}${font Blue Highway:pixelsize=24}video card :${font}${color white}
+
+${goto 50}NVidia GeForce 750m GPU: $alignr${nvidia gpufreq}Mhz
+${goto 50}Temperature: ${alignr} ${if_match ${nvidia temp} >= 55}${color orange}${nvidia temp}°C${else}${if_match ${nvidia temp} >= 75}${color red}${nvidia temp}°C${else}${color green}${nvidia temp}°C${endif}${endif}${color white}
+
+${color black}${if_match ${battery_percent BAT1} <= 22}${font Poky:pixelsize=30}${color red}1${font}${color}${else}${if_match ${battery_percent BAT1} <= 46}${font Poky:pixelsize=30}2${font}${else}${if_match ${battery_percent BAT1} <= 65}${font Poky:pixelsize=30}3${font}${else}${if_match ${battery_percent BAT1} <= 85}${font Poky:pixelsize=30}4${font}${else}${if_match ${battery_percent BAT1} <= 100}${color black}${font Poky:pixelsize=30}5${font}${endif}${endif}${endif}${endif}${endif}${alignc}${font Blue Highway:pixelsize=26}${color black}battery:
+${alignc}${color white}${battery_percent BAT1}%
+
+${color black}${font Poky:pixelsize=30}a${font}${alignc}${font Blue Highway:pixelsize=24}hdd :${font}        
+${color white}${goto 50}/: ${offset 3}${fs_bar 9,100 /}  | ${fs_used /} / ${fs_size /}${goto 450}${fs_used_perc /}%
+
+${color black}${font Poky:pixelsize=30}A${font} ${alignc}${font Blue Highway:pixelsize=26}memory :${color white}${font}
+${goto 50}ram: ${offset 19}${membar 9,100} $memperc% | processes: $processes 
+${goto 50}run: $running_processes
+${goto 50}swap: ${offset 14}${swapbar 9,100} $swapperc%
+${goto 50}$stippled_hr
+${goto 50}${color black}${voffset 10}NAME ${alignc}${goto 185}${alignr}MEM   ${alignr}  CPU${color white}
+
+${goto 50}${top name 1} ${goto 348}${top mem 1} ${alignr}${top cpu 1}
+${goto 50}${top name 2} ${goto 348}${top mem 2} ${alignr}${top cpu 2}
+${goto 50}${top name 3} ${goto 348}${top mem 3} ${alignr}${top cpu 3}
+${goto 50}$stippled_hr
+${goto 50}${top_mem name 1} ${goto 348}${top_mem cpu 1} ${alignr}${top_mem mem 1}
+${goto 50}${top_mem name 2} ${goto 348}${top_mem cpu 2} ${alignr}${top_mem mem 2}
+${goto 50}${top_mem name 3} ${goto 348}${top_mem cpu 3} ${alignr}${top_mem mem 3}
