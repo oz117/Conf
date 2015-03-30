@@ -1,0 +1,11 @@
+/*
+** For cpp
+*/
+
+class (tab) name {
+...
+}
+
+function (tab)  name {
+...
+}
