@@ -32,10 +32,6 @@ xftfont  Birch Std:pixelsize=40
 
 TEXT
 
-${GOTO 200}${font steiner -U:size=23}${time %l:%M}${GOTO 1400}CPU/RAM${GOTO 2800}Network
-${GOTO 1400}${color 000000}${cpugraph 20, 115 000000 ffffff}$color${font}  $cpu%${GOTO 2800}${color 000000}${upspeedgraph wlan0 20,90 000000 ffffff}$color ${upspeed wlan0}/s${GOTO 850}
-${GOTO 1400}${color 000000}${memgraph 20, 115 000000 ffffff}$color  $memperc%${GOTO 2800}${color 000000}${downspeedgraph wlan0 20,90 000000 ffffff}$color ${downspeed wlan0}/s${GOTO 850}
-${voffset -45}${GOTO 155}${time %A,}
-${GOTO 155}${time Date %d %B}
-
-
+${font steiner -U:size=23}${GOTO 200}${time %l:%M}${GOTO 1400}CPU/RAM${GOTO 2800}Network
+${GOTO 200}${time %A,}${GOTO 1400}${color 000000}${cpugraph 20, 115 000000 ffffff}$color${font}  $cpu%${GOTO 2800}${color 000000}${upspeedgraph wlan0 20,90 000000 ffffff}$color ${upspeed wlan0}/s${GOTO 850}
+${GOTO 200}${time Date %d %B}${GOTO 1400}${color 000000}${memgraph 20, 115 000000 ffffff}$color  $memperc%${GOTO 2800}${color 000000}${downspeedgraph wlan0 20,90 000000 ffffff}$color ${downspeed wlan0}/s${GOTO 850}

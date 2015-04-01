@@ -50,11 +50,11 @@ ${goto 50}distro: ${exec lsb_release -d -s} (${exec lsb_release -c -s}
 ${goto 50}kernel: $kernel $machine
 #Processors info
 ${font Poky:pixelsize=30}${color black}q${font}${voffset 6}${alignc}${font Blue Highway:pixelsize=24}proccessors :${font}${color white}
-
-${goto 50}cpu 1:${offset 15}${cpubar cpu0 9,100} ${cpu cpu0}% ${alignr} ${if_match ${hwmon 1 temp 1} >= 65}${color orange}${hwmon 1 temp 1}°C${else}${if_match ${hwmon 1 temp 1} >= 85}${color red}${hwmon 1 temp 1}°C${else}${color green}${hwmon 1 temp 1}°C${endif}${endif}${color white}
-${goto 50}cpu 2:${offset 15}${cpubar cpu0 9,100} ${cpu cpu1}% ${alignr} ${if_match ${hwmon 1 temp 2} >= 65}${color orange}${hwmon 1 temp 2}°C${else}${if_match ${hwmon 1 temp 2} >= 85}${color red}${hwmon 1 temp 2}°C${else}${color green}${hwmon 1 temp 2}°C${endif}${endif}${color white}
-${goto 50}cpu 3:${offset 15}${cpubar cpu0 9,100} ${cpu cpu2}% ${alignr} ${if_match ${hwmon 1 temp 3} >= 65}${color orange}${hwmon 1 temp 3}°C${else}${if_match ${hwmon 1 temp 3} >= 85}${color red}${hwmon 1 temp 3}°C${else}${color green}${hwmon 1 temp 3}°C${endif}${endif}${color white}
-${goto 50}cpu 4:${offset 15}${cpubar cpu0 9,100} ${cpu cpu3}% ${alignr} ${if_match ${hwmon 1 temp 4} >= 65}${color orange}${hwmon 1 temp 4}°C${else}${if_match ${hwmon 1 temp 4} >= 85}${color red}${hwmon 1 temp 4}°C${else}${color green}${hwmon 1 temp 4}°C${endif}${endif}${color white}
+#You get the temperature with hwmon 7 temp cpu_number, depending on your system each number can vary you have to go to /sys/devices/platform/coretemp.0 to find the correct hwmon number and then go inside and found each correct cpu by looking at their labels
+${goto 50}cpu 1:${offset 15}${cpubar cpu0 9,100} ${cpu cpu0}% ${alignr} ${if_match ${hwmon 7 temp 2} >= 65}${color orange}${hwmon 7 temp 2}°C${else}${if_match ${hwmon 7 temp 2} >= 85}${color red}${hwmon 7 temp 2}°C${else}${color green}${hwmon 7 temp 2}°C${endif}${endif}${color white}
+${goto 50}cpu 2:${offset 15}${cpubar cpu0 9,100} ${cpu cpu1}% ${alignr} ${if_match ${hwmon 7 temp 3} >= 65}${color orange}${hwmon 7 temp 3}°C${else}${if_match ${hwmon 7 temp 3} >= 85}${color red}${hwmon 7 temp 3}°C${else}${color green}${hwmon 7 temp 3}°C${endif}${endif}${color white}
+${goto 50}cpu 3:${offset 15}${cpubar cpu0 9,100} ${cpu cpu2}% ${alignr} ${if_match ${hwmon 7 temp 4} >= 65}${color orange}${hwmon 7 temp 4}°C${else}${if_match ${hwmon 7 temp 4} >= 85}${color red}${hwmon 7 temp 4}°C${else}${color green}${hwmon 7 temp 4}°C${endif}${endif}${color white}
+${goto 50}cpu 4:${offset 15}${cpubar cpu0 9,100} ${cpu cpu3}% ${alignr} ${if_match ${hwmon 7 temp 5} >= 65}${color orange}${hwmon 7 temp 5}°C${else}${if_match ${hwmon 7 temp 5} >= 85}${color red}${hwmon 7 temp 5}°C${else}${color green}${hwmon 7 temp 5}°C${endif}${endif}${color white}
 
 ${color black}${font}${voffset 6}${alignc}${font Blue Highway:pixelsize=24}video card :${font}${color white}
 
