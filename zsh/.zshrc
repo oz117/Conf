@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/orion/.oh-my-zsh
+
 POWERLINE_NO_BLANK_LINE="true"
 #POWERLINE_HIDE_USER_NAME="true"
 POWERLINE_HIDE_HOST_NAME="true"
 POWERLINE_SHOW_GIT_ON_RIGHT="true"
 POWERLINE_DETECT_SSH="true"
-
 POWERLINE_GIT_CLEAN="✔"
 POWERLINE_GIT_DIRTY="✘"
 POWERLINE_GIT_ADDED="%F{green}✚%F{black}"
@@ -24,30 +24,11 @@ ZSH_THEME="powerline"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Ush
-export SSH_KEY_PATH="~/.ssh/"
-export PAGER="most"
-alias ns_auth='~/.bin/instantbird/instantbird 2>/dev/null&'
-alias lla='ls -alF --color=auto'
-alias la='ls -A'
-alias l='ls -CF --color=auto'
-alias c='clear'
-alias mf='make fclean'
-alias ls='ls -Fh --color=auto'
-alias ll='ls -l --color=auto'
-alias grep='grep --color=auto'
-alias mm='make'
-alias mr='make re'
-alias mc='make clean'
-alias ne='emacs -nw'
-alias emacs='emacs -nw'
-alias quit='exit'
-alias sl='ls'
-alias ..='cd ..'
-alias mkdir='mkdir -p'
-alias xev="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
-alias google='ping 8.8.8.8'
-# comment the following line to disable bi-weekly auto-update checks.
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -89,6 +70,7 @@ plugins=(git)
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export PATH="$PATH:$HOME/.bin"
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -115,10 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# ssh
 export SSH_KEY_PATH="~/.ssh/"
 export PAGER="most"
-alias ns_auth='~/.bin/instantbird/instantbird 2>/dev/null&'
 alias lla='ls -alF --color=auto'
 alias la='ls -A'
 alias l='ls -CF --color=auto'
@@ -140,3 +120,14 @@ alias xev="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.
 alias google='ping 8.8.8.8'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glogs="glog --stat"
+function update {
+	if [ "$USER" = "root" ]
+	then
+		apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
+	else
+		sudo bash -c 'apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y; apt-get autoremove -y'
+
+	fi
+}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
